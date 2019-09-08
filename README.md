@@ -5,7 +5,7 @@ Modifies a post with plot data and generates a simple ascii plot using [asciigra
 
 ![img](asciiplot-example.gif)
 
-Usage (start a message in mattermost with `asciiplot `, following by a comma seperated list of numbers)
+Usage (start a message in mattermost with `asciiplot `, following by a comma seperated list of numbers).  This can be done by a bot/webhook as well.
 ```bash
 asciiplot 3, 4, 9, 6, 2, 4, 5, 8, 5, 10, 2, 7, 2, 5, 6
 ```

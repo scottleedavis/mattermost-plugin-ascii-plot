@@ -1,6 +1,6 @@
 {
-    "id": "com.github.scottleedavis.mattermost-plugin-plot-post",
-    "name": "Plugin Plot Post",
+    "id": "com.github.scottleedavis.mattermost-plugin-ascii-plot",
+    "name": "Plugin Ascii Plot",
     "description": "",
     "version": "0.1.0",
     "min_server_version": "5.12.0",

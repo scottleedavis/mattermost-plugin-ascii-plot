@@ -6,6 +6,6 @@ var manifest = struct {
 	ID      string
 	Version string
 }{
-	ID:      "com.github.scottleedavis.mattermost-plugin-plot-post",
+	ID:      "com.github.scottleedavis.mattermost-plugin-ascii-plot",
 	Version: "0.1.0",
 }

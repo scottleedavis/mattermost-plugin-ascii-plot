@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"github.com/mattermost/mattermost-server/model"
 	"sync"
 
 	"github.com/mattermost/mattermost-server/plugin"
@@ -12,17 +11,24 @@ import (
 type Plugin struct {
 	plugin.MattermostPlugin
 
-	// configurationLock synchronizes access to the configuration.
 	configurationLock sync.RWMutex
 
-	// configuration is the active plugin configuration. Consult getConfiguration and
-	// setConfiguration for usage.
 	configuration *configuration
 }
 
-// ServeHTTP demonstrates a plugin that handles HTTP requests by greeting the world.
-func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, world!")
-}
+// MessageWillBePosted is invoked when a message is posted by a user before it is committed
+// to the database. If you also want to act on edited posts, see MessageWillBeUpdated.
+//
+// To reject a post, return an non-empty string describing why the post was rejected.
+// To modify the post, return the replacement, non-nil *model.Post and an empty string.
+// To allow the post without modification, return a nil *model.Post and an empty string.
+// To dismiss the post, return a nil *model.Post and the const DismissPostError string.
+//
+// If you don't need to modify or reject posts, use MessageHasBeenPosted instead.
+//
+// Note that this method will be called for posts created by plugins, including the plugin that
+// created the post.
+func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
 
-// See https://developers.mattermost.com/extend/plugins/server/reference/
+	return nil, "foo"
+}

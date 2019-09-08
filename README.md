@@ -10,5 +10,3 @@ This will produce a single plugin file (with support for multiple architectures)
 ```
 dist/com.github.scottleedavis.mattermost-plugin-ascii-post.tar.gz
 ```
-
-}

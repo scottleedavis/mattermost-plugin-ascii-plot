@@ -1,4 +1,5 @@
-# Plugin Starter Template ![CircleCI branch](https://img.shields.io/circleci/project/github/scottleedavis/mattermost-plugin-ascii-plot/master.svg)
+# Mattermost Plugin Ascii Plot
+![CircleCI branch](https://img.shields.io/circleci/project/github/scottleedavis/mattermost-plugin-ascii-plot/master.svg)
 
 ![img](asciiplot-example.gif)
 

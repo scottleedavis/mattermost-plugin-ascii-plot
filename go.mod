@@ -9,6 +9,7 @@ require (
 	github.com/hashicorp/go-hclog v0.9.2 // indirect
 	github.com/hashicorp/go-plugin v1.0.1 // indirect
 	github.com/lib/pq v1.1.1 // indirect
+	github.com/magiconair/properties v1.8.0
 	github.com/mattermost/go-i18n v1.11.0 // indirect
 	github.com/mattermost/mattermost-server v5.12.0+incompatible
 	github.com/pelletier/go-toml v1.4.0 // indirect

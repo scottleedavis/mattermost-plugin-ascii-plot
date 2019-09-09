@@ -5,11 +5,15 @@ Modifies a post with plot data and generates a simple ascii plot using [asciigra
 
 ![img](asciiplot-example.gif)
 
-Usage (start a message in mattermost with `asciiplot` or `asciigraph`, followed by a space and a list of numbers seperated by commas)
+##### Usage 
+
+Start a message in Mattermost with `asciiplot` or `asciigraph`, followed by a space and a list of numbers separated by commas).  
+This can be done by a bot/webhook as well.
+
 ```bash
 asciiplot 3, 4, 9, 6, 2, 4, 5, 8, 5, 10, 2, 7, 2, 5, 6
 ```
-Build
+##### Build
 ```
 make
 ```

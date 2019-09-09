@@ -22,8 +22,9 @@ type Plugin struct {
 //MessageWillBePosted hook
 func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
 
-	if strings.HasPrefix(post.Message, "asciiplot ") {
+	if strings.HasPrefix(post.Message, "asciiplot ") || strings.HasPrefix(post.Message, "asciigraph ") {
 		pointsString := strings.TrimPrefix(post.Message, "asciiplot ")
+		pointsString = strings.TrimPrefix(pointsString, "asciigraph ")
 		pointsStringArray := strings.Split(pointsString, ",")
 
 		var numbers []float64
@@ -38,7 +39,16 @@ func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*mode
 				numbers = append(numbers, n)
 			}
 		}
-		graph := asciigraph.Plot(numbers, asciigraph.Height(15), asciigraph.Width(60))
+		configuration := p.getConfiguration()
+		height, err := strconv.ParseInt(configuration.Height, 10, 8)
+		if err != nil {
+			height = 15
+		}
+		width, err := strconv.ParseInt(configuration.Width, 10, 8)
+		if err != nil {
+			width = 60
+		}
+		graph := asciigraph.Plot(numbers, asciigraph.Height(int(height)), asciigraph.Width(int(width)))
 		post.Message = "```\n" + graph + "\n```"
 		return post, ""
 

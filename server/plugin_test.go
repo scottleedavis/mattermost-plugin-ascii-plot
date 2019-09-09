@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/mattermost/mattermost-server/model"
 	"github.com/mattermost/mattermost-server/plugin/plugintest"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -25,7 +25,7 @@ func TestMessageWillBePosted(t *testing.T) {
 		p.API = api
 
 		post := &model.Post{
-			Id: model.NewId(),
+			Id:      model.NewId(),
 			Message: "This is a test",
 		}
 		// (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string)
@@ -45,35 +45,40 @@ func TestMessageWillBePosted(t *testing.T) {
 		defer api.AssertExpectations(t)
 		p := &Plugin{}
 		p.API = api
+		p.configuration = &configuration{
+			Width:  "50",
+			Height: "15",
+		}
 
 		post := &model.Post{
-			Id: model.NewId(),
-			Message: "asciiplot 1,2,3,4,5",
+			Id:      model.NewId(),
+			Message: "asciiplot 1,2",
 		}
 		// (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string)
 		outPost, output := p.MessageWillBePosted(nil, post)
 		assert.Equal(t, output, "")
-		graph := "```"+`
- 5.00 ┤                                                          ╭
- 4.73 ┤                                                      ╭───╯
- 4.47 ┤                                                  ╭───╯
- 4.20 ┤                                              ╭───╯
- 3.93 ┤                                          ╭───╯
- 3.67 ┤                                      ╭───╯
- 3.40 ┤                                  ╭───╯
- 3.13 ┤                              ╭───╯
- 2.87 ┤                          ╭───╯
- 2.60 ┤                      ╭───╯
- 2.33 ┤                  ╭───╯
- 2.07 ┤              ╭───╯
- 1.80 ┤          ╭───╯
- 1.53 ┤      ╭───╯
- 1.27 ┤  ╭───╯
- 1.00 ┼──╯
-`+"```\n"
-		//assert.Equal(t, outPost.Message, graph)
-		fmt.Printf(outPost.Message)
-		fmt.Println()
-		fmt.Printf(graph)
+		graph := "```" + `
+ 2.00 ┤                                               ╭─ 
+ 1.93 ┤                                            ╭──╯  
+ 1.87 ┤                                        ╭───╯     
+ 1.80 ┤                                     ╭──╯         
+ 1.73 ┤                                  ╭──╯            
+ 1.67 ┤                               ╭──╯               
+ 1.60 ┤                           ╭───╯                  
+ 1.53 ┤                        ╭──╯                      
+ 1.47 ┤                     ╭──╯                         
+ 1.40 ┤                 ╭───╯                            
+ 1.33 ┤              ╭──╯                                
+ 1.27 ┤           ╭──╯                                   
+ 1.20 ┤        ╭──╯                                      
+ 1.13 ┤    ╭───╯                                         
+ 1.07 ┤ ╭──╯                                             
+ 1.00 ┼─╯                                                
+` + "```"
+		//fmt.Printf(outPost.Message)
+		//fmt.Println()
+		//fmt.Printf(graph)
+		assert.True(t, strings.Contains(outPost.Message, graph))
+		assert.Equal(t, outPost.Message, graph)
 	})
 }

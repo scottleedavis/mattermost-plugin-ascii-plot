@@ -2,7 +2,7 @@
     "id": "com.github.scottleedavis.mattermost-plugin-ascii-plot",
     "name": "Plugin Ascii Plot",
     "description": "",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "min_server_version": "5.12.0",
     "server": {
         "executables": {
@@ -14,6 +14,20 @@
     "settings_schema": {
         "header": "",
         "footer": "",
-        "settings": []
+        "settings": [{
+            "key": "Width",
+            "display_name": "Width",
+            "type": "text",
+            "help_text": "The width of the output for the plot.",
+            "placeholder": "60",
+            "default": "60"
+        }, {
+            "key": "Height",
+            "display_name": "Height",
+            "type": "text",
+            "help_text": "The height of the output for the plot.",
+            "placeholder": "15",
+            "default": "15"
+        }]
     }
 }

@@ -31,7 +31,7 @@ const (
 //MessageWillBePosted hook
 func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
 
-	regx := regexp.MustCompile(`(asciiplot|asciigraph)\s(\d+)((,\s*\d+)|(\s*,\s*\d+))*`)
+	regx := regexp.MustCompile(`(asciiplot|asciigraph)\s(-?\d+)((,\s*-?\d+)|(\s*,\s*-?\d+))*`)
 	matches := regx.FindStringSubmatch(post.Message)
 	if len(matches) > 0 {
 		pointsString := strings.TrimPrefix(matches[0], "asciiplot ")
@@ -60,7 +60,7 @@ func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*mode
 			width = WIDTH
 		}
 		graph := asciigraph.Plot(numbers, asciigraph.Height(int(height)), asciigraph.Width(int(width)))
-		post.Message = strings.Replace(post.Message, matches[0], "```\n"+graph+"\n```", 1)
+		post.Message = strings.Replace(post.Message, matches[0], "\n```\n"+graph+"\n```\n", 1)
 		return post, ""
 	}
 	return nil, ""

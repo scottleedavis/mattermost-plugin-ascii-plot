@@ -53,7 +53,7 @@ func TestMessageWillBePosted(t *testing.T) {
 		}
 		outPost, output := p.MessageWillBePosted(nil, post)
 		assert.Equal(t, output, "")
-		graph := "```" + `
+		graph := "\n```" + `
  2.00 ┤                                               ╭─ 
  1.93 ┤                                            ╭──╯  
  1.87 ┤                                        ╭───╯     
@@ -70,7 +70,7 @@ func TestMessageWillBePosted(t *testing.T) {
  1.13 ┤    ╭───╯                                         
  1.07 ┤ ╭──╯                                             
  1.00 ┼─╯                                                
-` + "```"
+` + "```\n"
 		assert.True(t, strings.Contains(outPost.Message, graph))
 		assert.Equal(t, outPost.Message, graph)
 
@@ -103,7 +103,7 @@ func TestMessageWillBePosted(t *testing.T) {
 		}
 		outPost, output := p.MessageWillBePosted(nil, post)
 		assert.Equal(t, output, "")
-		graph := "Let's look at the figures.\n```" + `
+		graph := "Let's look at the figures.\n\n```" + `
  2.00 ┤                                               ╭─ 
  1.93 ┤                                            ╭──╯  
  1.87 ┤                                        ╭───╯     
@@ -120,7 +120,7 @@ func TestMessageWillBePosted(t *testing.T) {
  1.13 ┤    ╭───╯                                         
  1.07 ┤ ╭──╯                                             
  1.00 ┼─╯                                                
-` + "```"
+` + "```\n"
 		assert.True(t, strings.Contains(outPost.Message, graph))
 		assert.Equal(t, outPost.Message, graph)
 	})

@@ -47,9 +47,9 @@ Those were important figures.
 Multiple `asciiplot 1,..,n` patterns can be in the same message.
 ```
 this is cool
-asciigraph 0,1
+asciiplot 0,1
 this is also cool
-asciiplot -1,0,1,0,-1
+asciigraph -1,0,1,0,-1
 ```
 Becomes
 ```

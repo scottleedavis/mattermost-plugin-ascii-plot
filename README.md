@@ -13,9 +13,35 @@ This can be done by a bot/webhook as well.
 ```bash
 asciiplot 3, 4, 9, 6, 2, 4, 5, 8, 5, 10, 2, 7, 2, 5, 6
 ```
+
+Messages can be multiline, where the pattern `asciiplot 1,..,n` is replaced by the ascii plot.  Whitespace around commas can be arbitrary.
 ```bash
 These are important figures.
-asciigraph -1 ,0,-2 , 3, -112
+asciigraph -1 ,0,-2 , 3, -12
+Those were important figures.
+```
+Becomes
+```
+These are important figures.
+
+   2.92 ┤                                          ╭─╮               
+   1.92 ┤                                       ╭──╯ ╰╮              
+   0.93 ┤                                    ╭──╯     ╰╮             
+  -0.07 ┤       ╭──────────╮              ╭──╯         ╰╮            
+  -1.06 ┼───────╯          ╰──────╮    ╭──╯             ╰╮           
+  -2.06 ┤                         ╰────╯                 ╰╮          
+  -3.05 ┤                                                 ╰╮         
+  -4.05 ┤                                                  ╰╮        
+  -5.04 ┤                                                   ╰╮       
+  -6.03 ┤                                                    ╰╮      
+  -7.03 ┤                                                     ╰╮     
+  -8.02 ┤                                                      ╰╮    
+  -9.02 ┼                                                       ╰╮   
+ -10.01 ┤                                                        ╰╮  
+ -11.01 ┤                                                         ╰╮ 
+ -12.00 ┤                                                          ╰ 
+ 
+Those were important figures.
 ```
 ##### Build
 ```

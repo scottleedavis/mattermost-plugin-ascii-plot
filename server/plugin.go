@@ -32,35 +32,41 @@ const (
 func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
 
 	regx := regexp.MustCompile(`(asciiplot|asciigraph)\s(-?\d+)((,\s*-?\d+)|(\s*,\s*-?\d+))*`)
-	matches := regx.FindStringSubmatch(post.Message)
+	//matches := regx.FindStringSubmatch(post.Message)
+	matches := regx.FindAllString(post.Message, -1)
+
 	if len(matches) > 0 {
-		pointsString := strings.TrimPrefix(matches[0], "asciiplot ")
-		pointsString = strings.TrimPrefix(pointsString, "asciigraph ")
-		pointsStringArray := strings.Split(pointsString, ",")
 
-		var numbers []float64
+		for _, m := range matches {
+			pointsString := strings.TrimPrefix(m, "asciiplot ")
+			pointsString = strings.TrimPrefix(pointsString, "asciigraph ")
+			pointsStringArray := strings.Split(pointsString, ",")
 
-		if len(pointsStringArray) <= 1 {
-			return nil, ""
-		}
+			var numbers []float64
 
-		for _, arg := range pointsStringArray {
-			arg = strings.Trim(arg, " ")
-			if n, err := strconv.ParseFloat(arg, 64); err == nil {
-				numbers = append(numbers, n)
+			if len(pointsStringArray) <= 1 {
+				return nil, ""
 			}
+
+			for _, arg := range pointsStringArray {
+				arg = strings.Trim(arg, " ")
+				if n, err := strconv.ParseFloat(arg, 64); err == nil {
+					numbers = append(numbers, n)
+				}
+			}
+			configuration := p.getConfiguration()
+			height, err := strconv.ParseInt(configuration.Height, BASE, BITSIZE)
+			if err != nil {
+				height = HEIGHT
+			}
+			width, err := strconv.ParseInt(configuration.Width, BASE, BITSIZE)
+			if err != nil {
+				width = WIDTH
+			}
+			graph := asciigraph.Plot(numbers, asciigraph.Height(int(height)), asciigraph.Width(int(width)))
+			post.Message = strings.Replace(post.Message, m, "\n```\n"+graph+"\n```\n", 1)
 		}
-		configuration := p.getConfiguration()
-		height, err := strconv.ParseInt(configuration.Height, BASE, BITSIZE)
-		if err != nil {
-			height = HEIGHT
-		}
-		width, err := strconv.ParseInt(configuration.Width, BASE, BITSIZE)
-		if err != nil {
-			width = WIDTH
-		}
-		graph := asciigraph.Plot(numbers, asciigraph.Height(int(height)), asciigraph.Width(int(width)))
-		post.Message = strings.Replace(post.Message, matches[0], "\n```\n"+graph+"\n```\n", 1)
+
 		return post, ""
 	}
 	return nil, ""

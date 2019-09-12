@@ -1,7 +1,7 @@
 # Mattermost Plugin Ascii Plot
 ![CircleCI branch](https://img.shields.io/circleci/project/github/scottleedavis/mattermost-plugin-ascii-plot/master.svg)   [![codecov](https://codecov.io/gh/scottleedavis/mattermost-plugin-ascii-plot/branch/master/graph/badge.svg)](https://codecov.io/gh/scottleedavis/mattermost-plugin-ascii-plot)  [![Releases](https://img.shields.io/github/release/scottleedavis/mattermost-plugin-ascii-plot.svg)](https://github.com/scottleedavis/mattermost-plugin-ascii-plot/releases/latest)
 
-Modifies a post with plot data in [Mattermost](https://mattermost.com) (or [Matterhorn](https://github.com/matterhorn-chat/matterhorn)) and generates a simple ascii plot using [asciigraph](https://github.com/guptarohit/asciigraph) 
+Modifies a post with plot data in [Mattermost](https://mattermost.com) (or [Matterhorn](https://github.com/matterhorn-chat/matterhorn)) and generates a [simple ascii plot](https://github.com/guptarohit/asciigraph) 
 
 ![img](asciiplot-example.gif)
 

@@ -1,13 +1,13 @@
 # Mattermost Plugin Ascii Plot
 ![CircleCI branch](https://img.shields.io/circleci/project/github/scottleedavis/mattermost-plugin-ascii-plot/master.svg)   [![codecov](https://codecov.io/gh/scottleedavis/mattermost-plugin-ascii-plot/branch/master/graph/badge.svg)](https://codecov.io/gh/scottleedavis/mattermost-plugin-ascii-plot)  [![Releases](https://img.shields.io/github/release/scottleedavis/mattermost-plugin-ascii-plot.svg)](https://github.com/scottleedavis/mattermost-plugin-ascii-plot/releases/latest)
 
-Modifies a post with plot data and generates a simple ascii plot using [asciigraph](https://github.com/guptarohit/asciigraph)
+Modifies a post in [Mattermost](https://mattermost.com) or [Matterhorn](https://github.com/matterhorn-chat/matterhorn) with plot data and generates a simple ascii plot using [asciigraph](https://github.com/guptarohit/asciigraph) 
 
 ![img](asciiplot-example.gif)
 
 ##### Usage 
 
-Create a message in [Mattermost](https://mattermost.com) with `asciiplot` or `asciigraph` followed by a space and a list of numbers separated by commas).  
+Create a message in  with `asciiplot` or `asciigraph` followed by a space and a list of numbers separated by commas).  
 This can be done by a bot/webhook as well.
 
 ```bash

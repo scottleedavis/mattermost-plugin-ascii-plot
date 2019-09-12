@@ -1,6 +1,8 @@
 package main
 
 import (
+	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
 
@@ -123,5 +125,33 @@ func TestMessageWillBePosted(t *testing.T) {
 ` + "```\n"
 		assert.True(t, strings.Contains(outPost.Message, graph))
 		assert.Equal(t, outPost.Message, graph)
+	})
+
+	t.Run("message with multiple asciiplots", func(t *testing.T) {
+		setupAPI := func() *plugintest.API {
+			api := &plugintest.API{}
+			api.On("LogInfo", mock.Anything).Maybe()
+			return api
+		}
+
+		api := setupAPI()
+		defer api.AssertExpectations(t)
+		p := &Plugin{}
+		p.API = api
+		p.configuration = &configuration{
+			Width:  "50",
+			Height: "15",
+		}
+		post := &model.Post{
+			Id:      model.NewId(),
+			Message: "Let's look at the figures.\nasciiplot 1,2\nasciiplot 1,2",
+		}
+		outPost, output := p.MessageWillBePosted(nil, post)
+		assert.Equal(t, output, "")
+		file, _ := os.Open("../assets/multiple_test.txt")
+		graph, _ := ioutil.ReadAll(file)
+
+		assert.True(t, strings.Contains(outPost.Message, string(graph)))
+		assert.Equal(t, outPost.Message, string(graph))
 	})
 }

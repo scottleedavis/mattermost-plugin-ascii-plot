@@ -26,28 +26,24 @@ const (
 	BITSIZE = 8
 	HEIGHT  = 15
 	WIDTH   = 60
+	PATTERN = `(asciiplot|asciigraph)\s(-?\d+)((,\s*-?\d+)|(\s*,\s*-?\d+))*`
 )
 
-//MessageWillBePosted hook
+//MessageWillBePosted runs before the post is saved to store
 func (p *Plugin) MessageWillBePosted(c *plugin.Context, post *model.Post) (*model.Post, string) {
 
-	regx := regexp.MustCompile(`(asciiplot|asciigraph)\s(-?\d+)((,\s*-?\d+)|(\s*,\s*-?\d+))*`)
-	//matches := regx.FindStringSubmatch(post.Message)
+	regx := regexp.MustCompile(PATTERN)
 	matches := regx.FindAllString(post.Message, -1)
-
 	if len(matches) > 0 {
-
 		for _, m := range matches {
 			pointsString := strings.TrimPrefix(m, "asciiplot ")
 			pointsString = strings.TrimPrefix(pointsString, "asciigraph ")
 			pointsStringArray := strings.Split(pointsString, ",")
 
 			var numbers []float64
-
 			if len(pointsStringArray) <= 1 {
 				return nil, ""
 			}
-
 			for _, arg := range pointsStringArray {
 				arg = strings.Trim(arg, " ")
 				if n, err := strconv.ParseFloat(arg, 64); err == nil {

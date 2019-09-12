@@ -7,11 +7,15 @@ Modifies a post with plot data and generates a simple ascii plot using [asciigra
 
 ##### Usage 
 
-Start a message in Mattermost with `asciiplot` or `asciigraph`, followed by a space and a list of numbers separated by commas).  
+Write in a message in [Mattermost](https://mattermost.com) with `asciiplot` or `asciigraph` followed by a space and a list of numbers separated by commas).  
 This can be done by a bot/webhook as well.
 
 ```bash
 asciiplot 3, 4, 9, 6, 2, 4, 5, 8, 5, 10, 2, 7, 2, 5, 6
+```
+```bash
+These are important figures.
+asciigraph -1 ,0,-2 , 3, -112
 ```
 ##### Build
 ```
